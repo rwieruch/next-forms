@@ -2,18 +2,15 @@
 
 import { useFormState } from 'react-dom';
 import { createMessage } from '@/app/actions';
+import { SubmitButton } from './submit-button';
 import { EMPTY_FORM_STATE } from '@/utils/to-form-state';
 import { useToastMessage } from '@/hooks/use-toast-message';
-import { useFormReset } from '@/hooks/use-form-reset';
-import { SubmitButton } from './submit-button';
 import { FieldError } from './field-error';
-import { useState } from 'react';
+import { useFormReset } from '@/hooks/use-form-reset';
 
 const MessageCreateForm = () => {
-  const [date, setDate] = useState(new Date());
-
   const [formState, action] = useFormState(
-    createMessage.bind(null, date),
+    createMessage,
     EMPTY_FORM_STATE
   );
 
@@ -26,10 +23,6 @@ const MessageCreateForm = () => {
       ref={formRef}
       className="flex flex-col gap-y-2"
     >
-      <label>Date</label>
-      <DatePicker value={date} onChange={setDate} />
-      <input type="hidden" name="date" value={date.toISOString()} />
-
       <label htmlFor="title">Title</label>
       <input id="title" name="title" className="border-2" />
       <FieldError formState={formState} name="title" />

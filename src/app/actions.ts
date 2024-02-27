@@ -40,7 +40,6 @@ const createMessageSchema = z.object({
 });
 
 export const createMessage = async (
-  date: Date,
   formState: FormState,
   formData: FormData
 ) => {
